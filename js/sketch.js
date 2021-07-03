@@ -4,25 +4,23 @@
 var capture = false; // default is to not capture frames, can be changed with button in browser
 var capturer = new CCapture({format:'png'});
 
-const NUM_FRAMES = 100;
+const NUM_FRAMES = 190;
 const T = 1;
 
 function setup() {
-    createCanvas(750, 750);
+    createCanvas(100, 100, WEBGL);
 }
 
 function draw() {
     if (capture && frameCount==1) capturer.start(); // start the animation capture
 
-    // here is the sketch
-    background(0)
+    //here is the sketch
     var t = ((frameCount-1)%NUM_FRAMES)/NUM_FRAMES
-    var x = width/3*sin(TWO_PI*t);
-    var y = width/3*cos(TWO_PI*t);
+    background(0, 0, 0);
+    rotateY(millis() / 1000);
     fill(255);
-    noStroke();
-    translate(width/2,height/2)
-    ellipse(x,y,width/10)
+    stroke(220);
+    torus(25, 15, 24, 16);
 
     if (capture){
         capturer.capture( canvas ); // if capture is 'true', save the frame
@@ -44,3 +42,4 @@ function buttonPress()
         location.reload(); //refresh the page (starts animation over, stops saving frames)
     }
 }
+
